@@ -1,0 +1,33 @@
+{
+  "name": "@example/basics",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/prefetch": "^0.0.7",
+    "@astrojs/react": "^1.1.2",
+    "@astrojs/sitemap": "^1.0.0",
+    "@astrojs/tailwind": "^1.0.0",
+    "@julian_cataldo/astro-tooltips": "^0.11.0",
+    "astro": "^1.2.1",
+    "astro-robots-txt": "^0.3.8",
+    "astro-seo": "^0.6.0",
+    "dateformat": "^5.0.3",
+    "firebase-tools": "^11.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.7",
+    "@types/react": "^18.0.19",
+    "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.5.4"
+  }
+}

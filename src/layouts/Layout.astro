@@ -1,0 +1,78 @@
+---
+import Aside from "../components/Aside.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Profile from "../components/Profile.astro";
+import { SEO } from "astro-seo";
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <title>{title}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="index, follow" />
+
+    <meta
+      name="description"
+      content="I am a UX/UI designer & front-end developer based in Delhi, India. I started my web-related career in 2014. I work with companies and clients personally, building websites and applications UIs with a strong focus on responsive design, accessibility, and performance."
+    />
+    <meta name="keywords" content="web app, mobile app, frontend developer, designer, freelance, ui designer, ux designer, next js, astro js, react js" />
+    <meta name="author" content="Ashish Chauhan" />
+
+    <!-- Facebook, whatsapp, instagram, twitter and other popular social media -->
+    <meta property="og:title" content="UX/UI designer & front-end developer based in Delhi" />
+    <meta
+      property="og:description"
+      content="I am a UX/UI designer & front-end developer based in Delhi, India. I started my web-related career in 2014. I work with companies and clients personally, building websites and applications UIs with a strong focus on responsive design, accessibility, and performance."
+    />
+    <meta property="og:image" content="https://becodie.com/banner.jpg" />
+    <meta property="og:url" content="https://becodie.com" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Jost:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
+  </head>
+  <body class="bg-white dark:bg-black">
+    <main class="mx-auto flex max-h-fit w-full max-w-7xl">
+      <Header />
+
+      <div class="mx-auto w-full max-w-2xl">
+        <div class="post px-6 pb-28 pt-10 lg:px-20">
+          <!-- For Mobile -->
+          <div class="flex lg:hidden mb-8">
+            <Profile />
+          </div>
+
+          <slot />
+
+          <!-- For Mobile -->
+          <div class="flex lg:hidden mt-16">
+            <Footer />
+          </div>
+        </div>
+      </div>
+
+      <Aside />
+    </main>
+  </body>
+</html>

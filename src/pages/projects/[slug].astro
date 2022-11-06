@@ -1,0 +1,139 @@
+---
+import PageTitle from "../../components/PageTitle.astro";
+import { Projects } from "../../core/_data/projectsDataService";
+import { Project } from "../../core/_types/project";
+import Layout from "../../layouts/Layout.astro";
+import {
+  ChevronLeft,
+  Calendar,
+  ExternalLink,
+  Layers,
+  Settings,
+} from "react-feather";
+
+export async function getStaticPaths() {
+  return Projects.map(
+    ({
+      slug,
+      title,
+      excerpt,
+      thumbnail,
+      completionYear,
+      services,
+      technologies,
+      liveUrl,
+      description,
+      caseStudy,
+    }) => {
+      return {
+        params: { slug },
+        props: {
+          title,
+          excerpt,
+          thumbnail,
+          completionYear,
+          services,
+          technologies,
+          liveUrl,
+          description,
+          caseStudy,
+        },
+      };
+    }
+  );
+}
+
+const project: Project = Astro.props as Project;
+---
+
+<Layout title={"BeCodie — " + project.excerpt}>
+  <div class="flex">
+    <a
+      href="/projects/"
+      class="flex items-center mb-3 text-black/70 dark:text-white/70 hover:underline"
+      ><ChevronLeft size={16} />Back</a
+    >
+  </div>
+
+  <figure class="mb-10">
+    <img class="w-full" src={project.thumbnail} alt="Placeholder" />
+  </figure>
+
+  <div class="mb-10">
+    <h1
+      class="font-serif mb-3 italic text-black/70 text-7xl font-medium md:text-3xl dark:text-white/70"
+    >
+      {project.title}
+    </h1>
+    <h2
+      class="mt-4 text-2xl font-black text-black md:mt-0 md:text-4xl dark:text-white"
+    >
+      {project.excerpt}
+    </h2>
+  </div>
+
+  <div class="border-y border-black/5 dark:border-white/5 py-8 grid gap-8">
+    <div class="text-gray-600 text-base flex-1">
+      <div class="flex items-center space-x-2 text-black/70 dark:text-white/70">
+        <Calendar size={16} />
+        <span>Year of completion</span>
+      </div>
+      <strong class="text-base text-black dark:text-white ml-6">
+        {project.completionYear}
+      </strong>
+    </div>
+
+    <div class="text-gray-600 text-base flex-1">
+      <div class="flex items-center space-x-2 text-black/70 dark:text-white/70">
+        <Settings size={16} />
+        <span>Services</span>
+      </div>
+      <strong class="text-base text-black dark:text-white ml-6">
+        {project.services}
+      </strong>
+    </div>
+
+    <div class="text-gray-600 text-base flex-1">
+      <div class="flex items-center space-x-2 text-black/70 dark:text-white/70">
+        <Layers size={16} />
+        <span>Technologies / Stacks / Tools</span>
+      </div>
+      <strong class="text-base text-black dark:text-white ml-6">
+        {project.technologies}
+      </strong>
+    </div>
+
+    <div class="text-gray-600 text-base flex-1">
+      <div class="flex items-center space-x-2 text-black/70 dark:text-white/70">
+        <ExternalLink size={16} />
+        <span>Live Site</span>
+      </div>
+      <a href={project.liveUrl} target="_blank">
+        <strong class="text-base text-black dark:text-white ml-6 underline"
+          >Check out the live product</strong
+        >
+      </a>
+    </div>
+  </div>
+
+  <article class="py-8">
+    <p class="text-lg text-black/70 dark:text-white/70 mb-8">
+      {project.description}
+    </p>
+
+    {
+      project.caseStudy.length ? (
+        <div class="flex flex-col">
+          {project.caseStudy.map((study) => (
+            <div class="py-8">
+              <h3 class="text-2xl font-medium text-black dark:text-white mb-2">{study.title}</h3>
+              <p class="text-black/70 dark:text-white/70">
+                {study.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      ) : null
+    }
+  </article>
+</Layout>

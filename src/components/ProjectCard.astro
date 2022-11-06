@@ -1,0 +1,36 @@
+---
+import { Project } from "./../core/_types/project";
+
+const props = Astro.props;
+const index = props.index;
+const project: Project = props.project;
+
+function isEven(i) {
+  return i % 2 == 0;
+}
+---
+
+<div
+  class:list={[
+    "flex flex-col justify-center items-center",
+    { "lg:-mt-12": !isEven(index) },
+  ]}
+>
+  <a
+    href={project.slug}
+    class="block leading-none no-underline text-black font-sans not-italic hover:text-black hover:opacity-75 transition-opacity ease-in-out duration-200 dark:text-white dark:hover:text-teal-200"
+  >
+    <figure class="mb-2">
+      <img class="w-full" src="/image-placeholder.svg" alt="Placeholder" />
+    </figure>
+
+    <div class="py-2">
+      <h3 class="text-base inline font-medium text-black dark:text-white">
+        {project.title}
+      </h3>
+      <span class="text-sm font-normal text-black/70 dark:text-white/70">
+        — {project.excerpt}
+      </span>
+    </div>
+  </a>
+</div>

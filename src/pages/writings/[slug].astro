@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+export async function getStaticPaths() {
+  let allBlogs = await Astro.glob("../../blogs/*.md");
+  let allSortedBlogs = allBlogs.sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf()
+  );
+  return allSortedBlogs.map((post) => {
+    return {
+      params: { slug: post.frontmatter.slug },
+      props: { ...post },
+    };
+  });
+}
+
+const { Content, frontmatter } = Astro.props;
+const title = frontmatter.title;
+---
+
+<Layout title="BeCodie — Writings">
+  <article class="prose dark:prose-invert">
+    <Content />
+  </article>
+</Layout>

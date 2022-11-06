@@ -1,0 +1,21 @@
+---
+import dateFormat, { masks } from "dateformat";
+const { blog } = Astro.props;
+---
+
+<a
+  href={`/writings/${blog.frontmatter.slug}`}
+  class="flex space-x-4 items-center cursor-pointer text-black pb-5 border-b border-black/5 last-of-type:border-0 dark:text-white dark:border-white/5"
+>
+  <div class="w-28 md:w-32 h-auto flex-none">
+    <img src={blog.frontmatter.thumbnail} alt={blog.frontmatter.title} />
+  </div>
+  <div>
+    <div class="text-sm text-black/70 font-normal dark:text-white/70">
+      {dateFormat(blog.frontmatter.date, "mmm dS, yyyy")}
+    </div>
+    <h2 class="font-medium hover:underline text-base leading-5 md:text-xl">
+      {blog.frontmatter.title}
+    </h2>
+  </div>
+</a>

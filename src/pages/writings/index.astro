@@ -1,0 +1,20 @@
+---
+import BlogCard from "../../components/BlogCard.astro";
+import PageTitle from "../../components/PageTitle.astro";
+import Layout from "../../layouts/Layout.astro";
+
+let allBlogs = await Astro.glob("../../blogs/*.md");
+---
+
+<Layout title="BeCodie — Writings">
+  <PageTitle
+    title="Thoughts & things happened in my life"
+    subtitle="Writings"
+  />
+
+  <article>
+    <div class="grid gap-8">
+      {allBlogs.map((blog) => <BlogCard blog={blog} />)}
+    </div>
+  </article>
+</Layout>
